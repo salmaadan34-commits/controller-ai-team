@@ -18,6 +18,7 @@ export const SOURCES = {
   close: {
     repo: `${OWNER}/month-end-close-agent`,
     label: "Month-End Close Agent",
+    demo: `https://${OWNER}.github.io/month-end-close-agent/`,
     files: ["examples/bank_rec_summary_2026-10.json", "examples/preclose_summary_2026-10.json"],
   },
   cash: {
