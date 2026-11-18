@@ -1,10 +1,11 @@
 {
- "synced_at": "2026-11-18T01:56:44.923Z",
+ "synced_at": "2026-11-18T21:54:59.613Z",
  "sources": {
   "close": {
    "repo": "salmaadan34-commits/month-end-close-agent",
    "label": "Month-End Close Agent",
-   "commit": "268e82d4346b373663923c25311ee54c847edb8a",
+   "demo": "https://salmaadan34-commits.github.io/month-end-close-agent/",
+   "commit": "10686b3639be0df064b3f745d46e604e39cf72aa",
    "files": {
     "examples/bank_rec_summary_2026-10.json": {
      "module": "bankrec",
@@ -722,12 +723,12 @@
       }
      ]
     }
-   },
-   "demo": "https://salmaadan34-commits.github.io/month-end-close-agent/"
+   }
   },
   "cash": {
    "repo": "salmaadan34-commits/13-week-cash-flow",
    "label": "13-Week Cash Flow Forecast",
+   "demo": "https://salmaadan34-commits.github.io/13-week-cash-flow/",
    "commit": "f5852f71ae0d830214dab7c7da9dc53bfbd28e1f",
    "files": {
     "data/company.csv": [
@@ -956,7 +957,7 @@
       "invoice": "INV-24062",
       "due_date": "2026-10-30",
       "days_past_due": "14",
-      "bucket": "1\u201330",
+      "bucket": "1–30",
       "balance_usd": "214800",
       "base_collection_rate": "0.95"
      },
@@ -965,7 +966,7 @@
       "invoice": "INV-24071",
       "due_date": "2026-11-02",
       "days_past_due": "11",
-      "bucket": "1\u201330",
+      "bucket": "1–30",
       "balance_usd": "176400",
       "base_collection_rate": "0.95"
      },
@@ -974,7 +975,7 @@
       "invoice": "INV-24079",
       "due_date": "2026-11-06",
       "days_past_due": "7",
-      "bucket": "1\u201330",
+      "bucket": "1–30",
       "balance_usd": "92150",
       "base_collection_rate": "0.95"
      },
@@ -983,7 +984,7 @@
       "invoice": "INV-24085",
       "due_date": "2026-11-09",
       "days_past_due": "4",
-      "bucket": "1\u201330",
+      "bucket": "1–30",
       "balance_usd": "118600",
       "base_collection_rate": "0.95"
      },
@@ -992,7 +993,7 @@
       "invoice": "INV-23991",
       "due_date": "2026-10-05",
       "days_past_due": "39",
-      "bucket": "31\u201360",
+      "bucket": "31–60",
       "balance_usd": "146300",
       "base_collection_rate": "0.85"
      },
@@ -1001,7 +1002,7 @@
       "invoice": "INV-24003",
       "due_date": "2026-10-12",
       "days_past_due": "32",
-      "bucket": "31\u201360",
+      "bucket": "31–60",
       "balance_usd": "87900",
       "base_collection_rate": "0.85"
      },
@@ -1010,7 +1011,7 @@
       "invoice": "INV-24010",
       "due_date": "2026-09-28",
       "days_past_due": "46",
-      "bucket": "31\u201360",
+      "bucket": "31–60",
       "balance_usd": "61200",
       "base_collection_rate": "0.85"
      },
@@ -1019,7 +1020,7 @@
       "invoice": "INV-23902",
       "due_date": "2026-09-04",
       "days_past_due": "70",
-      "bucket": "61\u201390",
+      "bucket": "61–90",
       "balance_usd": "71800",
       "base_collection_rate": "0.6"
      },
@@ -1028,7 +1029,7 @@
       "invoice": "INV-23915",
       "due_date": "2026-08-25",
       "days_past_due": "80",
-      "bucket": "61\u201390",
+      "bucket": "61–90",
       "balance_usd": "42350",
       "base_collection_rate": "0.6"
      },
@@ -1051,12 +1052,12 @@
       "base_collection_rate": "0.25"
      }
     ]
-   },
-   "demo": "https://salmaadan34-commits.github.io/13-week-cash-flow/"
+   }
   },
   "cfo": {
    "repo": "salmaadan34-commits/cfo-control-center",
    "label": "CFO Control Center",
+   "demo": "https://salmaadan34-commits.github.io/cfo-control-center/",
    "commit": "2c8baa4177433cfc021ec6b63ae94f597e6387a7",
    "files": {
     "data/company.csv": [
@@ -1494,15 +1495,15 @@
       "balance_usd_k": "2295.1"
      },
      {
-      "bucket": "1\u201330",
+      "bucket": "1–30",
       "balance_usd_k": "601.95"
      },
      {
-      "bucket": "31\u201360",
+      "bucket": "31–60",
       "balance_usd_k": "295.4"
      },
      {
-      "bucket": "61\u201390",
+      "bucket": "61–90",
       "balance_usd_k": "114.15"
      },
      {
@@ -1510,8 +1511,7 @@
       "balance_usd_k": "78.35"
      }
     ]
-   },
-   "demo": "https://salmaadan34-commits.github.io/cfo-control-center/"
+   }
   }
  }
 }
