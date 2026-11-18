@@ -1,0 +1,13 @@
+{
+  "name": "controller-ai-team",
+  "version": "1.0.0",
+  "description": "Hub for a controller AI team: agents in six teams, one rulebook deciding what is held for the controller, fed live by the close agent, CFO dashboard and 13-week cash forecast.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "sync": "node scripts/sync.mjs",
+    "test": "node --test",
+    "start": "npx --yes serve ."
+  },
+  "engines": { "node": ">=18" }
+}

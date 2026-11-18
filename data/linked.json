@@ -1,0 +1,1514 @@
+{
+ "synced_at": "2026-11-18T01:56:44.923Z",
+ "sources": {
+  "close": {
+   "repo": "salmaadan34-commits/month-end-close-agent",
+   "label": "Month-End Close Agent",
+   "commit": "268e82d4346b373663923c25311ee54c847edb8a",
+   "files": {
+    "examples/bank_rec_summary_2026-10.json": {
+     "module": "bankrec",
+     "period_end": "2026-10-31",
+     "matches": 262,
+     "accounts": [
+      {
+       "account": "OPERATING",
+       "gl_account": "1010",
+       "bank_end": 1107152.75,
+       "gl_end": 1100108.11,
+       "adjusted_bank": 1128695.48,
+       "adjusted_book": 1128695.48,
+       "difference": 0,
+       "match_rate": 0.9805,
+       "matched_lines": 251,
+       "bank_lines": 256
+      },
+      {
+       "account": "PAYROLL",
+       "gl_account": "1020",
+       "bank_end": 24816.55,
+       "gl_end": 24816.55,
+       "adjusted_bank": 24816.55,
+       "adjusted_book": 24816.55,
+       "difference": 0,
+       "match_rate": 1,
+       "matched_lines": 11,
+       "bank_lines": 11
+      }
+     ],
+     "items": [
+      {
+       "category": "Duplicate GL entry",
+       "account": "OPERATING",
+       "side": "book",
+       "date": "2026-10-09",
+       "description": "Vendor payment - Cloudhost Inc Bill-4471",
+       "amount": -3180,
+       "needs_attention": true,
+       "likely_cause": "Same memo and amount as JE-1267, which already cleared the bank once.",
+       "action": "Reverse JE-1268.",
+       "je_lines": [
+        [
+         "1010",
+         "Cash - Operating",
+         3180,
+         0
+        ],
+        [
+         "2000",
+         "Accounts Payable",
+         0,
+         3180
+        ]
+       ]
+      },
+      {
+       "category": "Amount mismatch",
+       "account": "OPERATING",
+       "side": "book",
+       "date": "2026-10-16",
+       "description": "Vendor payment - Office Depot Bill-6012  |  ACH DEBIT OFFICE DEPOT 552190",
+       "amount": -1524,
+       "needs_attention": true,
+       "likely_cause": "Transposition: GL 1,524.00 vs bank 1,254.00; difference 270.00 is divisible by 9 and digits match.",
+       "action": "Correct JE-1269 to the bank amount.",
+       "je_lines": [
+        [
+         "1010",
+         "Cash - Operating",
+         270,
+         0
+        ],
+        [
+         "2000",
+         "Accounts Payable",
+         0,
+         270
+        ]
+       ]
+      },
+      {
+       "category": "Outstanding check",
+       "account": "OPERATING",
+       "side": "book",
+       "date": "2026-10-22",
+       "description": "Check 10462 - Ballard Signs",
+       "amount": -3568.38,
+       "needs_attention": false,
+       "likely_cause": "Check issued 9 days before period end; not yet presented.",
+       "action": "Timing - confirm it clears next month.",
+       "je_lines": []
+      },
+      {
+       "category": "Outstanding check",
+       "account": "OPERATING",
+       "side": "book",
+       "date": "2026-10-23",
+       "description": "Check 10463 - Ballard Signs",
+       "amount": -1950.24,
+       "needs_attention": false,
+       "likely_cause": "Check issued 8 days before period end; not yet presented.",
+       "action": "Timing - confirm it clears next month.",
+       "je_lines": []
+      },
+      {
+       "category": "Outstanding check",
+       "account": "OPERATING",
+       "side": "book",
+       "date": "2026-10-27",
+       "description": "Check 10464 - Ballard Signs",
+       "amount": -418.88,
+       "needs_attention": false,
+       "likely_cause": "Check issued 4 days before period end; not yet presented.",
+       "action": "Timing - confirm it clears next month.",
+       "je_lines": []
+      },
+      {
+       "category": "Deposit in transit",
+       "account": "OPERATING",
+       "side": "book",
+       "date": "2026-10-28",
+       "description": "Customer payment - Lumen Energy INV-21443",
+       "amount": 14791.22,
+       "needs_attention": false,
+       "likely_cause": "Deposit booked in the last business days; bank has not posted it yet.",
+       "action": "Timing - confirm it posts in the first days of next month.",
+       "je_lines": []
+      },
+      {
+       "category": "Outstanding check",
+       "account": "OPERATING",
+       "side": "book",
+       "date": "2026-10-29",
+       "description": "Check 10465 - Capitol Hill Locksmith",
+       "amount": -1279.68,
+       "needs_attention": false,
+       "likely_cause": "Check issued 2 days before period end; not yet presented.",
+       "action": "Timing - confirm it clears next month.",
+       "je_lines": []
+      },
+      {
+       "category": "Deposit in transit",
+       "account": "OPERATING",
+       "side": "book",
+       "date": "2026-10-29",
+       "description": "Customer payment - Driftwood Media INV-23986",
+       "amount": 14763.27,
+       "needs_attention": false,
+       "likely_cause": "Deposit booked in the last business days; bank has not posted it yet.",
+       "action": "Timing - confirm it posts in the first days of next month.",
+       "je_lines": []
+      },
+      {
+       "category": "Outstanding check",
+       "account": "OPERATING",
+       "side": "book",
+       "date": "2026-10-30",
+       "description": "Check 10466 - Fremont Events",
+       "amount": -5042.55,
+       "needs_attention": false,
+       "likely_cause": "Check issued 1 days before period end; not yet presented.",
+       "action": "Timing - confirm it clears next month.",
+       "je_lines": []
+      },
+      {
+       "category": "Deposit in transit",
+       "account": "OPERATING",
+       "side": "book",
+       "date": "2026-10-30",
+       "description": "Customer payment - Maple Street Bakery INV-28584",
+       "amount": 5123.47,
+       "needs_attention": false,
+       "likely_cause": "Deposit booked in the last business days; bank has not posted it yet.",
+       "action": "Timing - confirm it posts in the first days of next month.",
+       "je_lines": []
+      },
+      {
+       "category": "Stale item",
+       "account": "OPERATING",
+       "side": "book",
+       "date": "2026-07-18",
+       "description": "Check 10233 - Olympic Supply Co",
+       "amount": -875.5,
+       "needs_attention": true,
+       "likely_cause": "Check outstanding 105 days (over 60).",
+       "action": "Contact payee; void and reissue or escheat per policy.",
+       "je_lines": []
+      },
+      {
+       "category": "Unbooked bank fee",
+       "account": "OPERATING",
+       "side": "bank",
+       "date": "2026-10-14",
+       "description": "OUTGOING WIRE FEE",
+       "amount": -30,
+       "needs_attention": true,
+       "likely_cause": "Bank charge not yet recorded in the GL.",
+       "action": "Book the fee.",
+       "je_lines": [
+        [
+         "6420",
+         "Bank Service Charges",
+         30,
+         0
+        ],
+        [
+         "1010",
+         "Cash - Operating",
+         0,
+         30
+        ]
+       ]
+      },
+      {
+       "category": "Unrecorded transaction",
+       "account": "OPERATING",
+       "side": "bank",
+       "date": "2026-10-22",
+       "description": "INCOMING WIRE FROM ACME HOLDINGS LLC REF FT26102214",
+       "amount": 25000,
+       "needs_attention": true,
+       "likely_cause": "Incoming wire from Acme Holdings LLC with no AR receipt or GL entry - likely an unapplied customer payment, investor funding or loan proceeds.",
+       "action": "Confirm purpose with Acme Holdings LLC / AR; park in suspense until applied.",
+       "je_lines": [
+        [
+         "1010",
+         "Cash - Operating",
+         25000,
+         0
+        ],
+        [
+         "2999",
+         "Suspense - Unidentified Cash",
+         0,
+         25000
+        ]
+       ]
+      },
+      {
+       "category": "Unbooked interest",
+       "account": "OPERATING",
+       "side": "bank",
+       "date": "2026-10-30",
+       "description": "INTEREST PAYMENT",
+       "amount": 212.37,
+       "needs_attention": true,
+       "likely_cause": "Interest credited by the bank, not yet recorded.",
+       "action": "Book interest income.",
+       "je_lines": [
+        [
+         "1010",
+         "Cash - Operating",
+         212.37,
+         0
+        ],
+        [
+         "4900",
+         "Interest Income",
+         0,
+         212.37
+        ]
+       ]
+      },
+      {
+       "category": "Unbooked bank fee",
+       "account": "OPERATING",
+       "side": "bank",
+       "date": "2026-10-30",
+       "description": "MONTHLY SERVICE FEE",
+       "amount": -45,
+       "needs_attention": true,
+       "likely_cause": "Bank charge not yet recorded in the GL.",
+       "action": "Book the fee.",
+       "je_lines": [
+        [
+         "6420",
+         "Bank Service Charges",
+         45,
+         0
+        ],
+        [
+         "1010",
+         "Cash - Operating",
+         0,
+         45
+        ]
+       ]
+      }
+     ]
+    },
+    "examples/preclose_summary_2026-10.json": {
+     "module": "preclose",
+     "period": "2026-10",
+     "stats": {
+      "lines_checked": 108,
+      "jes_checked": 28
+     },
+     "findings": [
+      {
+       "id": "PC-01",
+       "severity": "High",
+       "check": "Cutoff",
+       "je_number": "JE-202610-026",
+       "date": "2026-10-28",
+       "account": "6400",
+       "counterparty": "Pemberton Legal LLP",
+       "amount": 9500,
+       "issue": "Service period 2026-11 booked in 2026-10.",
+       "fix": "Move to 1400 Prepaid; expense in the service month.",
+       "reclass": [
+        [
+         "1400",
+         "Prepaid Expenses",
+         9500,
+         0,
+         "Cutoff Pemberton Legal LLP"
+        ],
+        [
+         "6400",
+         "Professional Fees",
+         0,
+         9500,
+         "Cutoff Pemberton Legal LLP"
+        ]
+       ]
+      },
+      {
+       "id": "PC-02",
+       "severity": "High",
+       "check": "Duplicate",
+       "je_number": "JE-202610-013",
+       "date": "2026-10-12",
+       "account": "6100",
+       "counterparty": "HubSpot",
+       "amount": 3872.58,
+       "issue": "Invoice HS-20261040 from HubSpot already booked in JE-202610-014.",
+       "fix": "Void JE-202610-013; confirm vendor was not paid twice.",
+       "reclass": [
+        [
+         "2000",
+         "Accounts Payable",
+         3872.58,
+         0,
+         "Void duplicate HubSpot"
+        ],
+        [
+         "6100",
+         "Software Subscriptions",
+         0,
+         3872.58,
+         "Void duplicate HubSpot"
+        ]
+       ]
+      },
+      {
+       "id": "PC-03",
+       "severity": "High",
+       "check": "Missing approval",
+       "je_number": "JE-202610-028",
+       "date": "2026-10-30",
+       "account": "6400",
+       "counterparty": "",
+       "amount": 6000,
+       "issue": "Manual JE 'Accrued audit fees' by jsmith has no approver.",
+       "fix": "Obtain approval with support before close.",
+       "reclass": []
+      },
+      {
+       "id": "PC-04",
+       "severity": "High",
+       "check": "Segregation of duties",
+       "je_number": "JE-202610-007",
+       "date": "2026-10-30",
+       "account": "6000",
+       "counterparty": "",
+       "amount": 10000,
+       "issue": "Manual JE 'Accrued bonus' created and approved by mlee.",
+       "fix": "Have an independent reviewer approve; note as a control exception.",
+       "reclass": []
+      },
+      {
+       "id": "PC-05",
+       "severity": "High",
+       "check": "Unbalanced JE",
+       "je_number": "JE-202610-027",
+       "date": "2026-10-30",
+       "account": "6310",
+       "counterparty": "",
+       "amount": 500,
+       "issue": "Debits 5,000.00 vs credits 4,500.00 (out by 500.00).",
+       "fix": "Return to preparer; correct the entry before posting.",
+       "reclass": []
+      },
+      {
+       "id": "PC-06",
+       "severity": "High",
+       "check": "Wrong account",
+       "je_number": "JE-202610-019",
+       "date": "2026-10-06",
+       "account": "5000",
+       "counterparty": "Staples",
+       "amount": 1218.54,
+       "issue": "Staples coded to 5000 Hosting (COGS); history is 6500 Office Supplies (3 of 3 months).",
+       "fix": "Reclass to 6500 Office Supplies.",
+       "reclass": [
+        [
+         "6500",
+         "Office Supplies",
+         1218.54,
+         0,
+         "Reclass Staples"
+        ],
+        [
+         "5000",
+         "Hosting (COGS)",
+         0,
+         1218.54,
+         "Reclass Staples"
+        ]
+       ]
+      },
+      {
+       "id": "PC-07",
+       "severity": "High",
+       "check": "Wrong account",
+       "je_number": "JE-202610-016",
+       "date": "2026-10-22",
+       "account": "6100",
+       "counterparty": "WeWork",
+       "amount": 18822.03,
+       "issue": "WeWork coded to 6100 Software Subscriptions; history is 6200 Rent (3 of 3 months).",
+       "fix": "Reclass to 6200 Rent.",
+       "reclass": [
+        [
+         "6200",
+         "Rent",
+         18822.03,
+         0,
+         "Reclass WeWork"
+        ],
+        [
+         "6100",
+         "Software Subscriptions",
+         0,
+         18822.03,
+         "Reclass WeWork"
+        ]
+       ]
+      },
+      {
+       "id": "PC-08",
+       "severity": "Medium",
+       "check": "Missing field",
+       "je_number": "JE-202610-012",
+       "date": "2026-10-09",
+       "account": "6100",
+       "counterparty": "Zoom",
+       "amount": 885.04,
+       "issue": "Department missing on expense line.",
+       "fix": "Assign department (needed for dept P&L and budget reporting).",
+       "reclass": []
+      },
+      {
+       "id": "PC-09",
+       "severity": "Medium",
+       "check": "Missing field",
+       "je_number": "JE-202610-020",
+       "date": "2026-10-15",
+       "account": "6500",
+       "counterparty": "Uline",
+       "amount": 598.92,
+       "issue": "Department missing on expense line.",
+       "fix": "Assign department (needed for dept P&L and budget reporting).",
+       "reclass": []
+      },
+      {
+       "id": "PC-10",
+       "severity": "Medium",
+       "check": "Missing field",
+       "je_number": "JE-202610-010",
+       "date": "2026-10-26",
+       "account": "6100",
+       "counterparty": "Adobe",
+       "amount": 1422.84,
+       "issue": "Department missing on expense line.",
+       "fix": "Assign department (needed for dept P&L and budget reporting).",
+       "reclass": []
+      },
+      {
+       "id": "PC-11",
+       "severity": "Medium",
+       "check": "Missing field",
+       "je_number": "JE-202610-021",
+       "date": "2026-10-28",
+       "account": "6600",
+       "counterparty": "",
+       "amount": 3496.36,
+       "issue": "Vendor missing on AP expense line.",
+       "fix": "Attach vendor (1099 tracking, spend analysis).",
+       "reclass": []
+      },
+      {
+       "id": "PC-12",
+       "severity": "Medium",
+       "check": "Unusual amount",
+       "je_number": "JE-202610-009",
+       "date": "2026-10-08",
+       "account": "6100",
+       "counterparty": "Salesforce",
+       "amount": 24800,
+       "issue": "24,800.00 is 4.0x Salesforce's typical 6,261.06. Memo: 'Salesforce annual renewal'.",
+       "fix": "Annual charge: book to 1400 Prepaid and amortize 2,066.67/month.",
+       "reclass": [
+        [
+         "1400",
+         "Prepaid Expenses",
+         22733.33,
+         0,
+         "Prepay Salesforce"
+        ],
+        [
+         "6100",
+         "Software Subscriptions",
+         0,
+         22733.33,
+         "Prepay Salesforce"
+        ]
+       ]
+      },
+      {
+       "id": "PC-13",
+       "severity": "Medium",
+       "check": "Unusual amount",
+       "je_number": "JE-202610-017",
+       "date": "2026-10-28",
+       "account": "6300",
+       "counterparty": "Google Ads",
+       "amount": 38400,
+       "issue": "38,400.00 is 3.2x Google Ads's typical 11,855.83. Memo: 'Q4 lead-gen campaign'.",
+       "fix": "Confirm with budget owner; check for prepaid or one-time item.",
+       "reclass": []
+      },
+      {
+       "id": "PC-14",
+       "severity": "Low",
+       "check": "Missing field",
+       "je_number": "JE-202610-022",
+       "date": "2026-10-16",
+       "account": "6700",
+       "counterparty": "Comcast Business",
+       "amount": 449.45,
+       "issue": "Memo blank.",
+       "fix": "Add description so the entry is auditable.",
+       "reclass": []
+      }
+     ],
+     "flux": [
+      {
+       "account": "4000",
+       "name": "Subscription Revenue",
+       "type": "Revenue",
+       "current": 266160,
+       "prior": 236160,
+       "var": 30000,
+       "pct": 0.127,
+       "budget": 251200,
+       "flagged": true,
+       "commentary": "Subscription Revenue up $30.0K (+13%) vs prior month; $15.0K over budget. Drivers: Northstar Payments $18.0K new this month; Copperline Bank $12.0K new this month."
+      },
+      {
+       "account": "5000",
+       "name": "Hosting (COGS)",
+       "type": "Expense",
+       "current": 60118.54,
+       "prior": 45969.85,
+       "var": 14148.69,
+       "pct": 0.3078,
+       "budget": 46900,
+       "flagged": true,
+       "commentary": "Hosting (COGS) up $14.1K (+31%) vs prior month; $13.2K over budget. Drivers: Amazon Web Services +$12.9K (Cloud hosting - usage spike from new customer onboarding)."
+      },
+      {
+       "account": "6000",
+       "name": "Salaries & Wages",
+       "type": "Expense",
+       "current": 511000,
+       "prior": 460000,
+       "var": 51000,
+       "pct": 0.1109,
+       "budget": 494000,
+       "flagged": true,
+       "commentary": "Salaries & Wages up $51.0K (+11%) vs prior month; $17.0K over budget. Drivers: Engineering +$51.0K (Payroll 2026-10 - Engineering (incl. 3 new hires))."
+      },
+      {
+       "account": "6010",
+       "name": "Payroll Taxes",
+       "type": "Expense",
+       "current": 38326.5,
+       "prior": 34425,
+       "var": 3901.5,
+       "pct": 0.1133,
+       "budget": 35100,
+       "flagged": false,
+       "commentary": ""
+      },
+      {
+       "account": "6020",
+       "name": "Employee Benefits",
+       "type": "Expense",
+       "current": 60120,
+       "prior": 54000,
+       "var": 6120,
+       "pct": 0.1133,
+       "budget": 55100,
+       "flagged": true,
+       "commentary": "Employee Benefits up $6.1K (+11%) vs prior month; $5.0K over budget. Drivers: Engineering +$6.1K (Payroll 2026-10 - Engineering (incl. 3 new hires))."
+      },
+      {
+       "account": "6100",
+       "name": "Software Subscriptions",
+       "type": "Expense",
+       "current": 56459.95,
+       "prior": 15051.56,
+       "var": 41408.39,
+       "pct": 2.7511,
+       "budget": 15400,
+       "flagged": true,
+       "commentary": "Software Subscriptions up $41.4K (+275%) vs prior month; $41.1K over budget. Drivers: WeWork $18.8K new this month (Office rent - Seattle) [see PC-07: Wrong account]; Salesforce +$18.5K (Salesforce annual renewal) [see PC-12: Unusual amount]. Part of this change comes from items flagged in pre-close; resolve those before finalizing."
+      },
+      {
+       "account": "6200",
+       "name": "Rent",
+       "type": "Expense",
+       "current": 0,
+       "prior": 18003.36,
+       "var": -18003.36,
+       "pct": -1,
+       "budget": 18400,
+       "flagged": true,
+       "commentary": "Rent down $18.0K (-100%) vs prior month; $18.4K under budget. Drivers: WeWork $18.0K not booked here this month [see PC-07: Wrong account]. Part of this change comes from items flagged in pre-close; resolve those before finalizing."
+      },
+      {
+       "account": "6300",
+       "name": "Marketing - Advertising",
+       "type": "Expense",
+       "current": 42900,
+       "prior": 11748.91,
+       "var": 31151.09,
+       "pct": 2.6514,
+       "budget": 30000,
+       "flagged": true,
+       "commentary": "Marketing - Advertising up $31.2K (+265%) vs prior month; $12.9K over budget. Drivers: Google Ads +$26.7K (Q4 lead-gen campaign) [see PC-13: Unusual amount]; LinkedIn Ads $9.0K new this month (Q4 ABM campaign). Part of this change comes from items flagged in pre-close; resolve those before finalizing."
+      },
+      {
+       "account": "6310",
+       "name": "Marketing - Events",
+       "type": "Expense",
+       "current": 30000,
+       "prior": 0,
+       "var": 30000,
+       "pct": null,
+       "budget": 20000,
+       "flagged": true,
+       "commentary": "Marketing - Events up $30.0K (n/m - nothing booked last month) vs prior month; $10.0K over budget. Drivers: FinTech Summit $25.0K new this month (FinTech Summit 2026 sponsorship); Reclass booth costs to events $5.0K new this month [see PC-05: Unbalanced JE]. Part of this change comes from items flagged in pre-close; resolve those before finalizing."
+      },
+      {
+       "account": "6400",
+       "name": "Professional Fees",
+       "type": "Expense",
+       "current": 24969.92,
+       "prior": 9564.83,
+       "var": 15405.09,
+       "pct": 1.6106,
+       "budget": 9800,
+       "flagged": true,
+       "commentary": "Professional Fees up $15.4K (+161%) vs prior month; $15.2K over budget. Drivers: Pemberton Legal LLP +$9.4K (Legal retainer - November) [see PC-01: Cutoff]; Accrued audit fees $6.0K new this month [see PC-03: Missing approval]. Part of this change comes from items flagged in pre-close; resolve those before finalizing."
+      },
+      {
+       "account": "6500",
+       "name": "Office Supplies",
+       "type": "Expense",
+       "current": 598.92,
+       "prior": 1849.64,
+       "var": -1250.72,
+       "pct": -0.6762,
+       "budget": 1900,
+       "flagged": false,
+       "commentary": ""
+      },
+      {
+       "account": "6600",
+       "name": "Travel & Meals",
+       "type": "Expense",
+       "current": 3496.36,
+       "prior": 3471.47,
+       "var": 24.89,
+       "pct": 0.0072,
+       "budget": 3500,
+       "flagged": false,
+       "commentary": ""
+      },
+      {
+       "account": "6700",
+       "name": "Utilities & Telecom",
+       "type": "Expense",
+       "current": 1522.05,
+       "prior": 1558.35,
+       "var": -36.3,
+       "pct": -0.0233,
+       "budget": 1600,
+       "flagged": false,
+       "commentary": ""
+      }
+     ]
+    }
+   }
+  },
+  "cash": {
+   "repo": "salmaadan34-commits/13-week-cash-flow",
+   "label": "13-Week Cash Flow Forecast",
+   "commit": "f5852f71ae0d830214dab7c7da9dc53bfbd28e1f",
+   "files": {
+    "data/company.csv": [
+     {
+      "item": "company",
+      "value": "Halden Systems, Inc."
+     },
+     {
+      "item": "as_of_date",
+      "value": "2026-11-13"
+     },
+     {
+      "item": "opening_cash_usd",
+      "value": "4750000"
+     },
+     {
+      "item": "revolver_commitment_usd",
+      "value": "4000000"
+     },
+     {
+      "item": "revolver_rate_pct",
+      "value": "7.25"
+     },
+     {
+      "item": "revolver_increment_usd",
+      "value": "250000"
+     },
+     {
+      "item": "revolver_repay_buffer_usd",
+      "value": "1000000"
+     }
+    ],
+    "data/ap_aging.csv": [
+     {
+      "vendor": "Northbeam Cloud",
+      "description": "Oct hosting usage",
+      "due_date": "2026-11-19",
+      "amount_usd": "186400",
+      "payment_hold": "no"
+     },
+     {
+      "vendor": "Sable & Pike LLP",
+      "description": "Legal: commercial contracts",
+      "due_date": "2026-11-10",
+      "amount_usd": "42750",
+      "payment_hold": "no"
+     },
+     {
+      "vendor": "Tidewater Staffing",
+      "description": "Contract engineers, Oct",
+      "due_date": "2026-11-26",
+      "amount_usd": "96300",
+      "payment_hold": "no"
+     },
+     {
+      "vendor": "Quillstone Software",
+      "description": "CRM licences, annual",
+      "due_date": "2026-12-01",
+      "amount_usd": "74800",
+      "payment_hold": "no"
+     },
+     {
+      "vendor": "Meridian Facilities",
+      "description": "Office services",
+      "due_date": "2026-11-30",
+      "amount_usd": "18200",
+      "payment_hold": "no"
+     },
+     {
+      "vendor": "Copperleaf Marketing",
+      "description": "Q4 campaign retainer",
+      "due_date": "2026-12-04",
+      "amount_usd": "61500",
+      "payment_hold": "yes"
+     },
+     {
+      "vendor": "Northbeam Cloud",
+      "description": "Nov committed spend",
+      "due_date": "2026-12-18",
+      "amount_usd": "192000",
+      "payment_hold": "no"
+     },
+     {
+      "vendor": "Tidewater Staffing",
+      "description": "Contract engineers, Nov",
+      "due_date": "2026-12-10",
+      "amount_usd": "98750",
+      "payment_hold": "no"
+     },
+     {
+      "vendor": "Brightwell Insurance",
+      "description": "D&O premium instalment",
+      "due_date": "2026-12-15",
+      "amount_usd": "54600",
+      "payment_hold": "no"
+     },
+     {
+      "vendor": "Vantage Data Feeds",
+      "description": "Market data subscription",
+      "due_date": "2026-12-03",
+      "amount_usd": "33900",
+      "payment_hold": "no"
+     },
+     {
+      "vendor": "Kinsey & Rowe CPAs",
+      "description": "Audit progress billing",
+      "due_date": "2026-12-21",
+      "amount_usd": "38000",
+      "payment_hold": "no"
+     },
+     {
+      "vendor": "Halcyon Travel",
+      "description": "Team travel",
+      "due_date": "2026-11-23",
+      "amount_usd": "21450",
+      "payment_hold": "no"
+     },
+     {
+      "vendor": "Fieldstone Telecom",
+      "description": "Phones and circuits",
+      "due_date": "2026-11-25",
+      "amount_usd": "12800",
+      "payment_hold": "no"
+     },
+     {
+      "vendor": "Orbitline Security",
+      "description": "SOC 2 tooling",
+      "due_date": "2026-12-28",
+      "amount_usd": "46200",
+      "payment_hold": "no"
+     }
+    ],
+    "data/ar_aging.csv": [
+     {
+      "customer": "Alder & Finch Retail",
+      "invoice": "INV-24117",
+      "due_date": "2026-11-16",
+      "days_past_due": "0",
+      "bucket": "Current",
+      "balance_usd": "412500",
+      "base_collection_rate": "0.98"
+     },
+     {
+      "customer": "Bluewater Freight",
+      "invoice": "INV-24121",
+      "due_date": "2026-11-19",
+      "days_past_due": "0",
+      "bucket": "Current",
+      "balance_usd": "286000",
+      "base_collection_rate": "0.98"
+     },
+     {
+      "customer": "Cedar Ridge Clinics",
+      "invoice": "INV-24130",
+      "due_date": "2026-11-27",
+      "days_past_due": "0",
+      "bucket": "Current",
+      "balance_usd": "198400",
+      "base_collection_rate": "0.98"
+     },
+     {
+      "customer": "Kestrel Aerospace",
+      "invoice": "INV-24133",
+      "due_date": "2026-12-02",
+      "days_past_due": "0",
+      "bucket": "Current",
+      "balance_usd": "365000",
+      "base_collection_rate": "0.98"
+     },
+     {
+      "customer": "Foxglove Insurance",
+      "invoice": "INV-24140",
+      "due_date": "2026-12-04",
+      "days_past_due": "0",
+      "bucket": "Current",
+      "balance_usd": "241750",
+      "base_collection_rate": "0.98"
+     },
+     {
+      "customer": "Harbor Lane Hotels",
+      "invoice": "INV-24144",
+      "due_date": "2026-12-07",
+      "days_past_due": "0",
+      "bucket": "Current",
+      "balance_usd": "154200",
+      "base_collection_rate": "0.98"
+     },
+     {
+      "customer": "Granite Peak Credit Union",
+      "invoice": "INV-24152",
+      "due_date": "2026-12-10",
+      "days_past_due": "0",
+      "bucket": "Current",
+      "balance_usd": "318900",
+      "base_collection_rate": "0.98"
+     },
+     {
+      "customer": "Ironleaf Foods",
+      "invoice": "INV-24155",
+      "due_date": "2026-12-11",
+      "days_past_due": "0",
+      "bucket": "Current",
+      "balance_usd": "97300",
+      "base_collection_rate": "0.98"
+     },
+     {
+      "customer": "Juniper Unified Schools",
+      "invoice": "INV-24161",
+      "due_date": "2026-12-14",
+      "days_past_due": "0",
+      "bucket": "Current",
+      "balance_usd": "132600",
+      "base_collection_rate": "0.98"
+     },
+     {
+      "customer": "Driftline Media",
+      "invoice": "INV-24168",
+      "due_date": "2026-11-18",
+      "days_past_due": "0",
+      "bucket": "Current",
+      "balance_usd": "88450",
+      "base_collection_rate": "0.98"
+     },
+     {
+      "customer": "Everhart Manufacturing",
+      "invoice": "INV-24062",
+      "due_date": "2026-10-30",
+      "days_past_due": "14",
+      "bucket": "1–30",
+      "balance_usd": "214800",
+      "base_collection_rate": "0.95"
+     },
+     {
+      "customer": "Lumen Street Bank",
+      "invoice": "INV-24071",
+      "due_date": "2026-11-02",
+      "days_past_due": "11",
+      "bucket": "1–30",
+      "balance_usd": "176400",
+      "base_collection_rate": "0.95"
+     },
+     {
+      "customer": "Driftline Media",
+      "invoice": "INV-24079",
+      "due_date": "2026-11-06",
+      "days_past_due": "7",
+      "bucket": "1–30",
+      "balance_usd": "92150",
+      "base_collection_rate": "0.95"
+     },
+     {
+      "customer": "Marlow Dental Group",
+      "invoice": "INV-24085",
+      "due_date": "2026-11-09",
+      "days_past_due": "4",
+      "bucket": "1–30",
+      "balance_usd": "118600",
+      "base_collection_rate": "0.95"
+     },
+     {
+      "customer": "Juniper Unified Schools",
+      "invoice": "INV-23991",
+      "due_date": "2026-10-05",
+      "days_past_due": "39",
+      "bucket": "31–60",
+      "balance_usd": "146300",
+      "base_collection_rate": "0.85"
+     },
+     {
+      "customer": "Northgate Property Mgmt",
+      "invoice": "INV-24003",
+      "due_date": "2026-10-12",
+      "days_past_due": "32",
+      "bucket": "31–60",
+      "balance_usd": "87900",
+      "base_collection_rate": "0.85"
+     },
+     {
+      "customer": "Harbor Lane Hotels",
+      "invoice": "INV-24010",
+      "due_date": "2026-09-28",
+      "days_past_due": "46",
+      "bucket": "31–60",
+      "balance_usd": "61200",
+      "base_collection_rate": "0.85"
+     },
+     {
+      "customer": "Orchard & Vine Hospitality",
+      "invoice": "INV-23902",
+      "due_date": "2026-09-04",
+      "days_past_due": "70",
+      "bucket": "61–90",
+      "balance_usd": "71800",
+      "base_collection_rate": "0.6"
+     },
+     {
+      "customer": "Pinecrest Logistics",
+      "invoice": "INV-23915",
+      "due_date": "2026-08-25",
+      "days_past_due": "80",
+      "bucket": "61–90",
+      "balance_usd": "42350",
+      "base_collection_rate": "0.6"
+     },
+     {
+      "customer": "Quarry Hill Builders",
+      "invoice": "INV-23810",
+      "due_date": "2026-07-20",
+      "days_past_due": "116",
+      "bucket": "90+",
+      "balance_usd": "58600",
+      "base_collection_rate": "0.25"
+     },
+     {
+      "customer": "Redfern Studios",
+      "invoice": "INV-23797",
+      "due_date": "2026-06-30",
+      "days_past_due": "136",
+      "bucket": "90+",
+      "balance_usd": "19750",
+      "base_collection_rate": "0.25"
+     }
+    ]
+   }
+  },
+  "cfo": {
+   "repo": "salmaadan34-commits/cfo-control-center",
+   "label": "CFO Control Center",
+   "commit": "2c8baa4177433cfc021ec6b63ae94f597e6387a7",
+   "files": {
+    "data/company.csv": [
+     {
+      "item": "name",
+      "value": "Halden Systems, Inc."
+     },
+     {
+      "item": "blurb",
+      "value": "Fictional B2B SaaS company, about 140 employees"
+     },
+     {
+      "item": "fiscalYear",
+      "value": "2026"
+     },
+     {
+      "item": "closedThrough",
+      "value": "2026-10"
+     },
+     {
+      "item": "openingCash",
+      "value": "10400"
+     },
+     {
+      "item": "openingArr",
+      "value": "18900"
+     },
+     {
+      "item": "minimumCash",
+      "value": "1500"
+     },
+     {
+      "item": "revolverCommitment",
+      "value": "4000"
+     },
+     {
+      "item": "closeTargetDays",
+      "value": "5"
+     },
+     {
+      "item": "cash_forecast_asOf",
+      "value": "2026-11-13"
+     },
+     {
+      "item": "cash_forecast_openingCash",
+      "value": "4750"
+     },
+     {
+      "item": "cash_forecast_lowPoint",
+      "value": "1718"
+     },
+     {
+      "item": "cash_forecast_lowPointWeek",
+      "value": "2027-01-29"
+     },
+     {
+      "item": "cash_forecast_week13Cash",
+      "value": "3435"
+     },
+     {
+      "item": "cash_forecast_week13Date",
+      "value": "2027-02-12"
+     },
+     {
+      "item": "cash_forecast_downsideRevolverPeak",
+      "value": "1750"
+     }
+    ],
+    "data/close_kpis.csv": [
+     {
+      "month": "2026-01",
+      "days_to_close": "9",
+      "open_reconciling_items": "24",
+      "items_over_60_days": "7",
+      "manual_journal_entries": "142",
+      "post_close_adjustments": "3",
+      "accounts_reconciled_on_time_pct": "82"
+     },
+     {
+      "month": "2026-02",
+      "days_to_close": "8",
+      "open_reconciling_items": "21",
+      "items_over_60_days": "6",
+      "manual_journal_entries": "131",
+      "post_close_adjustments": "2",
+      "accounts_reconciled_on_time_pct": "85"
+     },
+     {
+      "month": "2026-03",
+      "days_to_close": "8",
+      "open_reconciling_items": "19",
+      "items_over_60_days": "6",
+      "manual_journal_entries": "128",
+      "post_close_adjustments": "2",
+      "accounts_reconciled_on_time_pct": "87"
+     },
+     {
+      "month": "2026-04",
+      "days_to_close": "7",
+      "open_reconciling_items": "17",
+      "items_over_60_days": "5",
+      "manual_journal_entries": "120",
+      "post_close_adjustments": "2",
+      "accounts_reconciled_on_time_pct": "90"
+     },
+     {
+      "month": "2026-05",
+      "days_to_close": "7",
+      "open_reconciling_items": "15",
+      "items_over_60_days": "4",
+      "manual_journal_entries": "114",
+      "post_close_adjustments": "1",
+      "accounts_reconciled_on_time_pct": "92"
+     },
+     {
+      "month": "2026-06",
+      "days_to_close": "6",
+      "open_reconciling_items": "12",
+      "items_over_60_days": "3",
+      "manual_journal_entries": "105",
+      "post_close_adjustments": "1",
+      "accounts_reconciled_on_time_pct": "94"
+     },
+     {
+      "month": "2026-07",
+      "days_to_close": "6",
+      "open_reconciling_items": "11",
+      "items_over_60_days": "3",
+      "manual_journal_entries": "101",
+      "post_close_adjustments": "1",
+      "accounts_reconciled_on_time_pct": "95"
+     },
+     {
+      "month": "2026-08",
+      "days_to_close": "5",
+      "open_reconciling_items": "9",
+      "items_over_60_days": "2",
+      "manual_journal_entries": "96",
+      "post_close_adjustments": "0",
+      "accounts_reconciled_on_time_pct": "97"
+     },
+     {
+      "month": "2026-09",
+      "days_to_close": "6",
+      "open_reconciling_items": "8",
+      "items_over_60_days": "2",
+      "manual_journal_entries": "93",
+      "post_close_adjustments": "1",
+      "accounts_reconciled_on_time_pct": "97"
+     },
+     {
+      "month": "2026-10",
+      "days_to_close": "5",
+      "open_reconciling_items": "6",
+      "items_over_60_days": "1",
+      "manual_journal_entries": "88",
+      "post_close_adjustments": "0",
+      "accounts_reconciled_on_time_pct": "98"
+     }
+    ],
+    "data/headcount.csv": [
+     {
+      "month": "2026-01",
+      "scenario": "actual",
+      "support": "16",
+      "rd": "47",
+      "sm": "38",
+      "ga": "27"
+     },
+     {
+      "month": "2026-02",
+      "scenario": "actual",
+      "support": "16",
+      "rd": "48",
+      "sm": "38",
+      "ga": "27"
+     },
+     {
+      "month": "2026-03",
+      "scenario": "actual",
+      "support": "16",
+      "rd": "48",
+      "sm": "39",
+      "ga": "27"
+     },
+     {
+      "month": "2026-04",
+      "scenario": "actual",
+      "support": "17",
+      "rd": "49",
+      "sm": "40",
+      "ga": "27"
+     },
+     {
+      "month": "2026-05",
+      "scenario": "actual",
+      "support": "17",
+      "rd": "50",
+      "sm": "40",
+      "ga": "28"
+     },
+     {
+      "month": "2026-06",
+      "scenario": "actual",
+      "support": "17",
+      "rd": "50",
+      "sm": "41",
+      "ga": "28"
+     },
+     {
+      "month": "2026-07",
+      "scenario": "actual",
+      "support": "17",
+      "rd": "51",
+      "sm": "41",
+      "ga": "28"
+     },
+     {
+      "month": "2026-08",
+      "scenario": "actual",
+      "support": "18",
+      "rd": "51",
+      "sm": "42",
+      "ga": "28"
+     },
+     {
+      "month": "2026-09",
+      "scenario": "actual",
+      "support": "18",
+      "rd": "52",
+      "sm": "42",
+      "ga": "28"
+     },
+     {
+      "month": "2026-10",
+      "scenario": "actual",
+      "support": "18",
+      "rd": "52",
+      "sm": "42",
+      "ga": "28"
+     },
+     {
+      "month": "2026-01",
+      "scenario": "budget",
+      "support": "16",
+      "rd": "47",
+      "sm": "38",
+      "ga": "27"
+     },
+     {
+      "month": "2026-02",
+      "scenario": "budget",
+      "support": "16",
+      "rd": "48",
+      "sm": "39",
+      "ga": "27"
+     },
+     {
+      "month": "2026-03",
+      "scenario": "budget",
+      "support": "17",
+      "rd": "49",
+      "sm": "40",
+      "ga": "27"
+     },
+     {
+      "month": "2026-04",
+      "scenario": "budget",
+      "support": "17",
+      "rd": "50",
+      "sm": "41",
+      "ga": "28"
+     },
+     {
+      "month": "2026-05",
+      "scenario": "budget",
+      "support": "18",
+      "rd": "51",
+      "sm": "42",
+      "ga": "28"
+     },
+     {
+      "month": "2026-06",
+      "scenario": "budget",
+      "support": "18",
+      "rd": "52",
+      "sm": "43",
+      "ga": "28"
+     },
+     {
+      "month": "2026-07",
+      "scenario": "budget",
+      "support": "18",
+      "rd": "53",
+      "sm": "44",
+      "ga": "28"
+     },
+     {
+      "month": "2026-08",
+      "scenario": "budget",
+      "support": "19",
+      "rd": "54",
+      "sm": "45",
+      "ga": "28"
+     },
+     {
+      "month": "2026-09",
+      "scenario": "budget",
+      "support": "19",
+      "rd": "55",
+      "sm": "46",
+      "ga": "28"
+     },
+     {
+      "month": "2026-10",
+      "scenario": "budget",
+      "support": "19",
+      "rd": "55",
+      "sm": "46",
+      "ga": "28"
+     }
+    ],
+    "data/balances.csv": [
+     {
+      "month": "2026-01",
+      "cash_usd_k": "9187",
+      "accounts_receivable_usd_k": "3950",
+      "accounts_payable_usd_k": "880",
+      "deferred_revenue_usd_k": "1220"
+     },
+     {
+      "month": "2026-02",
+      "cash_usd_k": "9943",
+      "accounts_receivable_usd_k": "2640",
+      "accounts_payable_usd_k": "910",
+      "deferred_revenue_usd_k": "1120"
+     },
+     {
+      "month": "2026-03",
+      "cash_usd_k": "9306",
+      "accounts_receivable_usd_k": "2720",
+      "accounts_payable_usd_k": "960",
+      "deferred_revenue_usd_k": "1020"
+     },
+     {
+      "month": "2026-04",
+      "cash_usd_k": "8585",
+      "accounts_receivable_usd_k": "2810",
+      "accounts_payable_usd_k": "900",
+      "deferred_revenue_usd_k": "920"
+     },
+     {
+      "month": "2026-05",
+      "cash_usd_k": "8016",
+      "accounts_receivable_usd_k": "2860",
+      "accounts_payable_usd_k": "930",
+      "deferred_revenue_usd_k": "820"
+     },
+     {
+      "month": "2026-06",
+      "cash_usd_k": "7436",
+      "accounts_receivable_usd_k": "2930",
+      "accounts_payable_usd_k": "980",
+      "deferred_revenue_usd_k": "720"
+     },
+     {
+      "month": "2026-07",
+      "cash_usd_k": "6786",
+      "accounts_receivable_usd_k": "3010",
+      "accounts_payable_usd_k": "920",
+      "deferred_revenue_usd_k": "620"
+     },
+     {
+      "month": "2026-08",
+      "cash_usd_k": "6217",
+      "accounts_receivable_usd_k": "3080",
+      "accounts_payable_usd_k": "950",
+      "deferred_revenue_usd_k": "520"
+     },
+     {
+      "month": "2026-09",
+      "cash_usd_k": "5658",
+      "accounts_receivable_usd_k": "3150",
+      "accounts_payable_usd_k": "990",
+      "deferred_revenue_usd_k": "420"
+     },
+     {
+      "month": "2026-10",
+      "cash_usd_k": "4995",
+      "accounts_receivable_usd_k": "3260",
+      "accounts_payable_usd_k": "960",
+      "deferred_revenue_usd_k": "320"
+     }
+    ],
+    "data/variance_notes.csv": [
+     {
+      "month": "2026-03",
+      "line_id": "subscription",
+      "note": "Two enterprise deals slipped from Q1 into April."
+     },
+     {
+      "month": "2026-06",
+      "line_id": "sm_programs",
+      "note": "Spring demand campaign ran two weeks longer than planned."
+     },
+     {
+      "month": "2026-07",
+      "line_id": "subscription",
+      "note": "Quarry Hill Builders and Redfern Studios churned; both still carry 90+ day balances in AR."
+     },
+     {
+      "month": "2026-07",
+      "line_id": "sm_programs",
+      "note": "Summer events moved to September."
+     },
+     {
+      "month": "2026-08",
+      "line_id": "ga_professional",
+      "note": "Outside counsel on commercial contract renewals, not in the budget."
+     },
+     {
+      "month": "2026-09",
+      "line_id": "sm_programs",
+      "note": "Industry conference sponsorship pulled forward from Q4."
+     },
+     {
+      "month": "2026-10",
+      "line_id": "subscription",
+      "note": "Orchard & Vine Hospitality churned and Harbor Lane Hotels downgraded; both are past due in AR."
+     }
+    ],
+    "data/ar_aging_nov13.csv": [
+     {
+      "bucket": "Current",
+      "balance_usd_k": "2295.1"
+     },
+     {
+      "bucket": "1–30",
+      "balance_usd_k": "601.95"
+     },
+     {
+      "bucket": "31–60",
+      "balance_usd_k": "295.4"
+     },
+     {
+      "bucket": "61–90",
+      "balance_usd_k": "114.15"
+     },
+     {
+      "bucket": "90+",
+      "balance_usd_k": "78.35"
+     }
+    ]
+   }
+  }
+ }
+}

@@ -1,0 +1,30 @@
+name: Sync connected projects
+
+on:
+  schedule:
+    - cron: "17 14 * * *"   # daily, 6:17 am Pacific
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Pull latest outputs from the close agent, CFO dashboard and 13-week forecast
+        run: node scripts/sync.mjs
+      - name: Check the hub still builds and every cross-project check passes
+        run: npm test
+      - name: Commit the new snapshot if anything changed
+        run: |
+          if git diff --quiet data/linked.json; then echo "No changes"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/linked.json
+          git commit -m "Sync connected projects"
+          git push
