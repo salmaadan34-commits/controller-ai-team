@@ -23,11 +23,13 @@ export const SOURCES = {
   cash: {
     repo: `${OWNER}/13-week-cash-flow`,
     label: "13-Week Cash Flow Forecast",
+    demo: `https://${OWNER}.github.io/13-week-cash-flow/`,
     files: ["data/company.csv", "data/ap_aging.csv", "data/ar_aging.csv"],
   },
   cfo: {
     repo: `${OWNER}/cfo-control-center`,
     label: "CFO Control Center",
+    demo: `https://${OWNER}.github.io/cfo-control-center/`,
     files: ["data/company.csv", "data/close_kpis.csv", "data/headcount.csv", "data/balances.csv",
             "data/variance_notes.csv", "data/ar_aging_nov13.csv"],
   },
@@ -65,7 +67,7 @@ async function main() {
   const out = { synced_at: new Date().toISOString(), sources: {} };
   for (const [key, src] of Object.entries(SOURCES)) {
     const got = local[key] ? fromLocal(local[key], src) : await fromGitHub(key, src);
-    out.sources[key] = { repo: src.repo, label: src.label, ...got };
+    out.sources[key] = { repo: src.repo, label: src.label, demo: src.demo ?? null, ...got };
     console.log(`  ${key.padEnd(6)} ${src.repo} @ ${got.commit.slice(0, 7)} (${src.files.length} files)`);
   }
   mkdirSync(join(ROOT, "data"), { recursive: true });

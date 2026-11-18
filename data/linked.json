@@ -722,7 +722,8 @@
       }
      ]
     }
-   }
+   },
+   "demo": null
   },
   "cash": {
    "repo": "salmaadan34-commits/13-week-cash-flow",
@@ -955,7 +956,7 @@
       "invoice": "INV-24062",
       "due_date": "2026-10-30",
       "days_past_due": "14",
-      "bucket": "1–30",
+      "bucket": "1\u201330",
       "balance_usd": "214800",
       "base_collection_rate": "0.95"
      },
@@ -964,7 +965,7 @@
       "invoice": "INV-24071",
       "due_date": "2026-11-02",
       "days_past_due": "11",
-      "bucket": "1–30",
+      "bucket": "1\u201330",
       "balance_usd": "176400",
       "base_collection_rate": "0.95"
      },
@@ -973,7 +974,7 @@
       "invoice": "INV-24079",
       "due_date": "2026-11-06",
       "days_past_due": "7",
-      "bucket": "1–30",
+      "bucket": "1\u201330",
       "balance_usd": "92150",
       "base_collection_rate": "0.95"
      },
@@ -982,7 +983,7 @@
       "invoice": "INV-24085",
       "due_date": "2026-11-09",
       "days_past_due": "4",
-      "bucket": "1–30",
+      "bucket": "1\u201330",
       "balance_usd": "118600",
       "base_collection_rate": "0.95"
      },
@@ -991,7 +992,7 @@
       "invoice": "INV-23991",
       "due_date": "2026-10-05",
       "days_past_due": "39",
-      "bucket": "31–60",
+      "bucket": "31\u201360",
       "balance_usd": "146300",
       "base_collection_rate": "0.85"
      },
@@ -1000,7 +1001,7 @@
       "invoice": "INV-24003",
       "due_date": "2026-10-12",
       "days_past_due": "32",
-      "bucket": "31–60",
+      "bucket": "31\u201360",
       "balance_usd": "87900",
       "base_collection_rate": "0.85"
      },
@@ -1009,7 +1010,7 @@
       "invoice": "INV-24010",
       "due_date": "2026-09-28",
       "days_past_due": "46",
-      "bucket": "31–60",
+      "bucket": "31\u201360",
       "balance_usd": "61200",
       "base_collection_rate": "0.85"
      },
@@ -1018,7 +1019,7 @@
       "invoice": "INV-23902",
       "due_date": "2026-09-04",
       "days_past_due": "70",
-      "bucket": "61–90",
+      "bucket": "61\u201390",
       "balance_usd": "71800",
       "base_collection_rate": "0.6"
      },
@@ -1027,7 +1028,7 @@
       "invoice": "INV-23915",
       "due_date": "2026-08-25",
       "days_past_due": "80",
-      "bucket": "61–90",
+      "bucket": "61\u201390",
       "balance_usd": "42350",
       "base_collection_rate": "0.6"
      },
@@ -1050,7 +1051,8 @@
       "base_collection_rate": "0.25"
      }
     ]
-   }
+   },
+   "demo": "https://salmaadan34-commits.github.io/13-week-cash-flow/"
   },
   "cfo": {
    "repo": "salmaadan34-commits/cfo-control-center",
@@ -1492,15 +1494,15 @@
       "balance_usd_k": "2295.1"
      },
      {
-      "bucket": "1–30",
+      "bucket": "1\u201330",
       "balance_usd_k": "601.95"
      },
      {
-      "bucket": "31–60",
+      "bucket": "31\u201360",
       "balance_usd_k": "295.4"
      },
      {
-      "bucket": "61–90",
+      "bucket": "61\u201390",
       "balance_usd_k": "114.15"
      },
      {
@@ -1508,7 +1510,8 @@
       "balance_usd_k": "78.35"
      }
     ]
-   }
+   },
+   "demo": "https://salmaadan34-commits.github.io/cfo-control-center/"
   }
  }
 }

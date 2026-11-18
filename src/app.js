@@ -4,6 +4,8 @@ import { TEAMS, buildWeek } from "./derive.js";
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const money = (x) => (x == null ? "" : `$${Number(x).toLocaleString("en-US", { maximumFractionDigits: 0 })}`);
+// Live demo when the project has one, otherwise its repo.
+const srcUrl = (s) => s.demo || `https://github.com/${s.repo}`;
 const teamName = (id) => TEAMS.find((t) => t.id === id)?.name ?? id;
 
 const state = { filter: null, decisions: [], week: null, linked: null };
@@ -41,7 +43,7 @@ function render() {
   }).join("");
 
   $("sources").innerHTML = Object.entries(L.sources).map(([k, s]) =>
-    `<li><a href="https://github.com/${s.repo}" target="_blank" rel="noopener"><span class="src ${k}">${esc(s.label)}</span></a><small>@ ${s.commit.slice(0, 7)}</small></li>`).join("") +
+    `<li><a href="${srcUrl(s)}" target="_blank" rel="noopener"><span class="src ${k}">${esc(s.label)}</span></a><small>@ ${s.commit.slice(0, 7)}</small></li>`).join("") +
     `<li class="muted small">Synced ${new Date(L.synced_at).toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })}</li>`;
 
   $("teams").innerHTML = TEAMS.map((t, i) => {
@@ -96,7 +98,7 @@ function openDrawer(id) {
   $("dRules").innerHTML = h.rules.map((r) => `<div class="rule">Rule ${r.id}: ${esc(r.name)}<small>${esc(r.why)}</small></div>`).join("");
   $("dDetail").innerHTML = (h.detail ?? [["Summary", h.summary]]).map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("");
   const s = state.linked.sources[h.source];
-  $("dSrc").innerHTML = `Source: <a href="https://github.com/${s.repo}" target="_blank" rel="noopener">${esc(s.label)}</a> @ ${s.commit.slice(0, 7)}`;
+  $("dSrc").innerHTML = `Source: <a href="${srcUrl(s)}" target="_blank" rel="noopener">${esc(s.label)}</a> @ ${s.commit.slice(0, 7)}`;
   $("drawer").hidden = false;
   $("drawer").dataset.id = id;
   $("dOk").focus();
