@@ -8,8 +8,18 @@ test("tax filings are always held (rule 1)", () => {
 test("payments are always held (rule 2), whatever the amount", () => {
   assert.equal(evaluate({ type: "payment", amount: 1 }).held, true);
 });
-test("JEs under the limit and outside revenue run on their own", () => {
-  assert.equal(evaluate({ type: "journal_entry", amount: 9999.99, accounts: ["6420", "1010"] }).held, false);
+test("JEs well under the limit and outside revenue run on their own", () => {
+  assert.equal(evaluate({ type: "journal_entry", amount: 8999.99, accounts: ["6420", "1010"] }).held, false);
+});
+test("JEs just under the limit are held (rule 7)", () => {
+  assert.deepEqual(evaluate({ type: "journal_entry", amount: 9500, accounts: ["6100", "2100"] }).rules.map((r) => r.id), [7]);
+  assert.deepEqual(evaluate({ type: "journal_entry", amount: 9999.99, accounts: ["6420", "1010"] }).rules.map((r) => r.id), [7]);
+});
+test("scheduling future payments is held (rule 2)", () => {
+  assert.deepEqual(evaluate({ type: "payment_schedule", amount: 1 }).rules.map((r) => r.id), [2]);
+});
+test("anything sent to customers is held (rule 6)", () => {
+  assert.deepEqual(evaluate({ type: "collections", destination: "customer" }).rules.map((r) => r.id), [6]);
 });
 test("JEs at the limit are held (rule 3)", () => {
   assert.equal(evaluate({ type: "journal_entry", amount: 10000, accounts: ["6420", "1010"] }).held, true);

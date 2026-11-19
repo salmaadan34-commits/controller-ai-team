@@ -25,15 +25,17 @@ Nothing on the page is typed in by hand. Each action names the project and commi
 
 ## The rulebook
 
-All agent actions go through `evaluate()` in [`src/rules.js`](src/rules.js). These five things always need the controller:
+All agent actions go through `evaluate()` in [`src/rules.js`](src/rules.js). These seven things always need the controller:
 
 1. Anything to the IRS or a state
-2. Releasing cash
+2. Releasing cash or scheduling future payments
 3. Journal entries of $10,000 or more, or anything touching revenue (4000–4199)
 4. Anything to auditors or the board
 5. Vendor or bank master-data changes
+6. Anything sent to customers, including collections reminders
+7. Journal entries just under the limit ($9,000–$9,999), so the limit can't be avoided by sizing entries below it
 
-On the current data, 23 jobs finish on their own and 7 are held. The held items are a $229K payment run, the board pack, auditor workpapers, a $78K bad-debt reserve and three proposed JEs over the limit. Each one opens to a review panel with the rule it triggered, the supporting detail and its source. You can approve it or send it back.
+On the current data, 20 jobs finish on their own and 10 are held. The held items are a $229K payment run, $687K of bills to schedule for later runs, collections reminders on 9 overdue invoices, the board pack, auditor workpapers, a $78K bad-debt reserve, three proposed JEs over the limit and a $9,500 cutoff entry just under it. Each one opens to a review panel with the rule it triggered, the supporting detail and its source. You can approve it or send it back.
 
 ## Cross-project checks
 
@@ -52,7 +54,7 @@ If a change in one project breaks another, a check fails and the daily sync show
 
 ```bash
 npm run sync      # pull the latest outputs from the three projects into data/linked.json
-npm test          # 15 tests: rulebook, derivations, cross-project checks
+npm test          # 19 tests: rulebook, derivations, cross-project checks
 npm start         # serve locally
 ```
 
