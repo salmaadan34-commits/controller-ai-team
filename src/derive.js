@@ -79,7 +79,7 @@ export function buildWeek(linked) {
     summary: `${lastKpi.open_reconciling_items} open reconciling items · ${lastKpi.items_over_60_days} over 60 days · ${lastKpi.manual_journal_entries} manual JEs` });
   add({ team: "close", role: "Bank rec", source: "close", type: "report", destination: "auditor",
     title: "Send October bank rec workpapers to auditors",
-    summary: `${bank.accounts.length} accounts, both tied · requested for interim fieldwork`,
+    summary: `${bank.accounts.length} accounts, ${bank.accounts.every((a) => a.difference === 0) ? "all tied" : "not all tied"} · requested for interim fieldwork`,
     detail: [["Workpapers", "Rec summary, exceptions, proposed JEs, matched items"],
       ...bank.accounts.map((a) => [a.account, `Adjusted ${usd(a.adjusted_bank, 2)} · difference ${usd(a.difference, 2)}`]),
       ["Open", `${bank.items.filter((x) => x.needs_attention).length} items still need attention`]] });
@@ -155,7 +155,12 @@ export function buildWeek(linked) {
   // ---------------- Cross-project data checks
   const arTotal13 = ar.reduce((s, r) => s + num(r.balance_usd), 0);
   const arTotalCfo = cfoAr.reduce((s, r) => s + num(r.balance_usd_k) * 1000, 0); // stored by bucket in $K
+  const recMonth = bank.period_end.slice(0, 7);
+  const recCash = Math.round(bank.accounts.reduce((s, a) => s + a.adjusted_book, 0) * 100) / 100;
+  const bsCash = num(bal.find((r) => r.month === recMonth)?.cash_usd_k) * 1000; // balance sheet stored in $K
   const checks = [
+    { name: `${recMonth} cash: bank recs (adjusted book) = CFO balance sheet`, sources: ["close", "cfo"],
+      a: recCash, b: bsCash, test: (a, b) => Math.abs(a - b) < 500 },
     { name: "Opening cash: CFO dashboard = 13-week forecast", sources: ["cfo", "cash"],
       a: num(cfoCo.cash_forecast_openingCash) * 1000, b: openingCash },
     { name: "AR aging total: CFO dashboard = 13-week forecast", sources: ["cfo", "cash"],
