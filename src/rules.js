@@ -2,6 +2,8 @@
 // and what must be held for the controller. Every agent action passes through evaluate().
 
 export const JE_APPROVAL_LIMIT = 10000;
+/** Entries this close below the limit are held too, so the limit can't be avoided by sizing just under it. */
+export const JE_NEAR_LIMIT = 9000;
 
 /** Revenue accounts are 4000-4199; 4900 other income (e.g. interest) is not revenue. */
 export const isRevenueAccount = (acct) => /^4[01]\d\d$/.test(String(acct));
@@ -15,9 +17,9 @@ export const RULES = [
   },
   {
     id: 2,
-    name: "Releasing cash",
-    why: "Agents prepare payment runs; only a person releases money.",
-    test: (a) => a.type === "payment",
+    name: "Releasing or scheduling cash",
+    why: "Agents prepare payment runs; only a person releases money or commits it to a future run.",
+    test: (a) => a.type === "payment" || a.type === "payment_schedule",
   },
   {
     id: 3,
@@ -38,6 +40,18 @@ export const RULES = [
     name: "Vendor or bank master-data changes",
     why: "Changed bank details are the #1 payment-fraud route; verify by call-back.",
     test: (a) => a.type === "master_data",
+  },
+  {
+    id: 6,
+    name: "Anything sent to customers",
+    why: "Collections reminders and other customer messages go out under the company's name.",
+    test: (a) => a.destination === "customer",
+  },
+  {
+    id: 7,
+    name: `Journal entries just under the limit ($${JE_NEAR_LIMIT.toLocaleString("en-US")}–$${(JE_APPROVAL_LIMIT - 0.01).toLocaleString("en-US")})`,
+    why: "Entries sized just below the approval limit are the classic way around it.",
+    test: (a) => a.type === "journal_entry" && (a.amount ?? 0) >= JE_NEAR_LIMIT && (a.amount ?? 0) < JE_APPROVAL_LIMIT,
   },
 ];
 

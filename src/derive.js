@@ -98,15 +98,19 @@ export function buildWeek(linked) {
       title: `Kept ${r.vendor} on hold`, summary: `${usd(num(r.amount_usd))} · ${r.description} · billing dispute` });
   }
   const later = ap.filter((r) => r.payment_hold === "no" && r.due_date > weekEnd);
-  add({ team: "ap", role: "Due-date tracking", source: "cash", type: "review",
-    title: `Scheduled ${later.length} bills for later runs`,
-    summary: `${k(later.reduce((s, r) => s + num(r.amount_usd), 0))} due ${fmtDate(addDays(weekEnd, 1))}–${fmtDate(later.map((r) => r.due_date).sort().at(-1))}` });
+  const laterTotal = later.reduce((s, r) => s + num(r.amount_usd), 0);
+  add({ team: "ap", role: "Due-date tracking", source: "cash", type: "payment_schedule", amount: laterTotal,
+    title: `Schedule ${later.length} bills for later runs`,
+    summary: `${k(laterTotal)} due ${fmtDate(addDays(weekEnd, 1))}–${fmtDate(later.map((r) => r.due_date).sort().at(-1))}`,
+    detail: [["Bills", String(later.length)], ["Total", usd(laterTotal)],
+      ...later.map((r) => [r.vendor, `${usd(num(r.amount_usd))} · due ${fmtDate(r.due_date)}`])] });
 
   // ---------------- AR  (13-week AR aging + CFO variance notes)
   const overdue = ar.filter((r) => num(r.days_past_due) > 0 && r.bucket !== "90+");
-  add({ team: "ar", role: "Collections", source: "cash", type: "collections",
-    title: `Sent reminders on ${overdue.length} overdue invoices`,
-    summary: `${k(overdue.reduce((s, r) => s + num(r.balance_usd), 0))} past due 1–60 days` });
+  add({ team: "ar", role: "Collections", source: "cash", type: "collections", destination: "customer",
+    title: `Send reminders on ${overdue.length} overdue invoices`,
+    summary: `${k(overdue.reduce((s, r) => s + num(r.balance_usd), 0))} past due 1–60 days · drafted, not sent`,
+    detail: overdue.map((r) => [r.customer, `${r.invoice} · ${usd(num(r.balance_usd))} · ${r.days_past_due} days past due`]) });
   const dueSoon = ar.filter((r) => r.bucket === "Current" && r.due_date <= weekEnd);
   add({ team: "ar", role: "Cash forecast", source: "cash", type: "forecast",
     title: `Expecting ${k(dueSoon.reduce((s, r) => s + num(r.balance_usd), 0))} in receipts by ${fmtDate(weekEnd)}`,

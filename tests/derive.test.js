@@ -31,10 +31,17 @@ test("bank rec actions come straight from the close agent's summary", () => {
   assert.equal(all.filter((a) => a.role === "Bank rec" && a.type === "reconciliation").length, bank.accounts.length);
 });
 
-test("every proposed JE from the close agent is either done or held by rule 3", () => {
+test("every proposed JE is done only if under $9,000 and outside revenue (rules 3 and 7)", () => {
   for (const a of all.filter((x) => x.type === "journal_entry")) {
     const held = week.held.includes(a);
-    assert.equal(held, a.amount >= 10000 || a.accounts.some((x) => /^4[01]\d\d$/.test(x)), a.title);
+    assert.equal(held, a.amount >= 9000 || a.accounts.some((x) => /^4[01]\d\d$/.test(x)), a.title);
+  }
+});
+
+test("nothing that contacts customers or commits cash is done without the controller", () => {
+  for (const a of week.done) {
+    assert.notEqual(a.destination, "customer", a.title);
+    assert.ok(!["payment", "payment_schedule"].includes(a.type), a.title);
   }
 });
 
