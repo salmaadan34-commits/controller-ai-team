@@ -28,7 +28,8 @@ function render() {
   $("company").textContent = w.company;
   $("week").textContent = `Week of ${new Date(w.asOf + "T00:00:00Z").toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" })}`;
 
-  const stats = [[TEAMS.length, "Teams"], [TEAMS.reduce((s, t) => s + t.roles.length, 0), "Roles"],
+  const passing = w.checks.filter((c) => c.pass).length;
+  const stats = [[TEAMS.length, "Teams"], [`${passing}/${w.checks.length}`, "Checks pass"],
     [w.done.length + state.decisions.filter((d) => d.ok).length, "Jobs done"], [open.length, "Held for you", "warm"]];
   $("stats").innerHTML = stats.map(([v, l, c]) => `<div class="stat ${c ?? ""}"><b>${v}</b><span>${l}</span></div>`).join("");
 
