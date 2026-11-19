@@ -33,12 +33,13 @@ All agent actions go through `evaluate()` in [`src/rules.js`](src/rules.js). The
 4. Anything to auditors or the board
 5. Vendor or bank master-data changes
 
-On the current data, 22 jobs finish on their own and 7 are held. The held items are a $229K payment run, the board pack, auditor workpapers, a $78K bad-debt reserve and three proposed JEs over the limit. Each one opens to a review panel with the rule it triggered, the supporting detail and its source. You can approve it or send it back.
+On the current data, 23 jobs finish on their own and 7 are held. The held items are a $229K payment run, the board pack, auditor workpapers, a $78K bad-debt reserve and three proposed JEs over the limit. Each one opens to a review panel with the rule it triggered, the supporting detail and its source. You can approve it or send it back.
 
 ## Cross-project checks
 
 The hub also checks that the projects agree with each other:
 
+- October cash: bank recs (adjusted book, all accounts) = CFO balance sheet ($4,995,000)
 - Opening cash: CFO dashboard = 13-week forecast
 - AR aging total: CFO dashboard = 13-week forecast ($3,384,950)
 - Forecast as-of date matches
@@ -72,7 +73,7 @@ tests/              node --test suites
 
 ## Limits
 
-- The close agent runs on its own sample ledger, so its amounts are at a smaller scale than Halden's. Moving it onto Halden's books is next.
+- The close agent's bank rec ties to Halden's October cash across operating, payroll and the money market reserve. Its pre-close checks and flux still run on their own sample GL; moving those onto Halden's books is next.
 - Approve and send back are recorded in the page only. The hub never posts, files or pays.
 
 All data is synthetic.
