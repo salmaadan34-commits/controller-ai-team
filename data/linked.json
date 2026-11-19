@@ -1,11 +1,11 @@
 {
- "synced_at": "2026-11-19T04:21:54.478Z",
+ "synced_at": "2026-11-19T22:08:55.867Z",
  "sources": {
   "close": {
    "repo": "salmaadan34-commits/month-end-close-agent",
    "label": "Month-End Close Agent",
    "demo": "https://salmaadan34-commits.github.io/month-end-close-agent/",
-   "commit": "708548ca8a36c017e87e29022bb9b9c94a99cdd9",
+   "commit": "a4cf5c902ce6d298054a78eebf8605b3d8be4f3d",
    "files": {
     "examples/bank_rec_summary_2026-10.json": {
      "module": "bankrec",
