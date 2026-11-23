@@ -5,7 +5,7 @@
    "repo": "salmaadan34-commits/month-end-close-agent",
    "label": "Month-End Close Agent",
    "demo": "https://salmaadan34-commits.github.io/month-end-close-agent/",
-   "commit": "a4cf5c902ce6d298054a78eebf8605b3d8be4f3d",
+   "commit": "4ed275a06bcdda3080a7f009bdb6590ac9189355",
    "files": {
     "examples/bank_rec_summary_2026-10.json": {
      "module": "bankrec",
@@ -19,7 +19,7 @@
        "gl_end": 1100108.11,
        "adjusted_bank": 1128695.48,
        "adjusted_book": 1128695.48,
-       "difference": 0,
+       "difference": 0.0,
        "match_rate": 0.9805,
        "matched_lines": 251,
        "bank_lines": 256
@@ -31,8 +31,8 @@
        "gl_end": 24816.55,
        "adjusted_bank": 24816.55,
        "adjusted_book": 24816.55,
-       "difference": 0,
-       "match_rate": 1,
+       "difference": 0.0,
+       "match_rate": 1.0,
        "matched_lines": 11,
        "bank_lines": 11
       },
@@ -43,8 +43,8 @@
        "gl_end": 3841487.97,
        "adjusted_bank": 3841487.97,
        "adjusted_book": 3841487.97,
-       "difference": 0,
-       "match_rate": 1,
+       "difference": 0.0,
+       "match_rate": 1.0,
        "matched_lines": 1,
        "bank_lines": 1
       }
@@ -56,7 +56,7 @@
        "side": "book",
        "date": "2026-10-09",
        "description": "Vendor payment - Cloudhost Inc Bill-4471",
-       "amount": -3180,
+       "amount": -3180.0,
        "needs_attention": true,
        "likely_cause": "Same memo and amount as JE-1267, which already cleared the bank once.",
        "action": "Reverse JE-1268.",
@@ -64,14 +64,14 @@
         [
          "1010",
          "Cash - Operating",
-         3180,
+         3180.0,
          0
         ],
         [
          "2000",
          "Accounts Payable",
          0,
-         3180
+         3180.0
         ]
        ]
       },
@@ -81,7 +81,7 @@
        "side": "book",
        "date": "2026-10-16",
        "description": "Vendor payment - Office Depot Bill-6012  |  ACH DEBIT OFFICE DEPOT 552190",
-       "amount": -1524,
+       "amount": -1524.0,
        "needs_attention": true,
        "likely_cause": "Transposition: GL 1,524.00 vs bank 1,254.00; difference 270.00 is divisible by 9 and digits match.",
        "action": "Correct JE-1269 to the bank amount.",
@@ -89,14 +89,14 @@
         [
          "1010",
          "Cash - Operating",
-         270,
+         270.0,
          0
         ],
         [
          "2000",
          "Accounts Payable",
          0,
-         270
+         270.0
         ]
        ]
       },
@@ -214,7 +214,7 @@
        "side": "bank",
        "date": "2026-10-14",
        "description": "OUTGOING WIRE FEE",
-       "amount": -30,
+       "amount": -30.0,
        "needs_attention": true,
        "likely_cause": "Bank charge not yet recorded in the GL.",
        "action": "Book the fee.",
@@ -222,14 +222,14 @@
         [
          "6420",
          "Bank Service Charges",
-         30,
+         30.0,
          0
         ],
         [
          "1010",
          "Cash - Operating",
          0,
-         30
+         30.0
         ]
        ]
       },
@@ -239,7 +239,7 @@
        "side": "bank",
        "date": "2026-10-22",
        "description": "INCOMING WIRE FROM ACME HOLDINGS LLC REF FT26102214",
-       "amount": 25000,
+       "amount": 25000.0,
        "needs_attention": true,
        "likely_cause": "Incoming wire from Acme Holdings LLC with no AR receipt or GL entry - likely an unapplied customer payment, investor funding or loan proceeds.",
        "action": "Confirm purpose with Acme Holdings LLC / AR; park in suspense until applied.",
@@ -247,14 +247,14 @@
         [
          "1010",
          "Cash - Operating",
-         25000,
+         25000.0,
          0
         ],
         [
          "2999",
          "Suspense - Unidentified Cash",
          0,
-         25000
+         25000.0
         ]
        ]
       },
@@ -289,7 +289,7 @@
        "side": "bank",
        "date": "2026-10-30",
        "description": "MONTHLY SERVICE FEE",
-       "amount": -45,
+       "amount": -45.0,
        "needs_attention": true,
        "likely_cause": "Bank charge not yet recorded in the GL.",
        "action": "Book the fee.",
@@ -297,14 +297,14 @@
         [
          "6420",
          "Bank Service Charges",
-         45,
+         45.0,
          0
         ],
         [
          "1010",
          "Cash - Operating",
          0,
-         45
+         45.0
         ]
        ]
       }
@@ -326,14 +326,14 @@
        "date": "2026-10-28",
        "account": "6400",
        "counterparty": "Pemberton Legal LLP",
-       "amount": 9500,
+       "amount": 9500.0,
        "issue": "Service period 2026-11 booked in 2026-10.",
-       "fix": "Move to 1400 Prepaid; expense in the service month.",
+       "fix": "Reclass 9,500.00 from 6400 Professional Fees to 1400 Prepaid Expenses (Dr 1400 / Cr 6400) to reverse the 2026-10 expense; expense it to 6400 in 2026-11, the service month.",
        "reclass": [
         [
          "1400",
          "Prepaid Expenses",
-         9500,
+         9500.0,
          0,
          "Cutoff Pemberton Legal LLP"
         ],
@@ -341,7 +341,7 @@
          "6400",
          "Professional Fees",
          0,
-         9500,
+         9500.0,
          "Cutoff Pemberton Legal LLP"
         ]
        ]
@@ -382,7 +382,7 @@
        "date": "2026-10-30",
        "account": "6400",
        "counterparty": "",
-       "amount": 6000,
+       "amount": 6000.0,
        "issue": "Manual JE 'Accrued audit fees' by jsmith has no approver.",
        "fix": "Obtain approval with support before close.",
        "reclass": []
@@ -395,7 +395,7 @@
        "date": "2026-10-30",
        "account": "6000",
        "counterparty": "",
-       "amount": 10000,
+       "amount": 10000.0,
        "issue": "Manual JE 'Accrued bonus' created and approved by mlee.",
        "fix": "Have an independent reviewer approve; note as a control exception.",
        "reclass": []
@@ -408,7 +408,7 @@
        "date": "2026-10-30",
        "account": "6310",
        "counterparty": "",
-       "amount": 500,
+       "amount": 500.0,
        "issue": "Debits 5,000.00 vs credits 4,500.00 (out by 500.00).",
        "fix": "Return to preparer; correct the entry before posting.",
        "reclass": []
@@ -529,14 +529,14 @@
        "date": "2026-10-08",
        "account": "6100",
        "counterparty": "Salesforce",
-       "amount": 24800,
-       "issue": "24,800.00 is 4.0x Salesforce's typical 6,261.06. Memo: 'Salesforce annual renewal'.",
-       "fix": "Annual charge: book to 1400 Prepaid and amortize 2,066.67/month.",
+       "amount": 74400.0,
+       "issue": "74,400.00 is 11.9x Salesforce's typical 6,261.06 (median of 3 monthly invoices, 2026-07 to 2026-09). Memo: 'Salesforce annual renewal, Oct 2026-Sep 2027'.",
+       "fix": "12-month charge. Reclass 68,200.00 from 6100 Software Subscriptions to 1400 Prepaid Expenses (Dr 1400 / Cr 6100), leaving one month (6,200.00) in 6100 Software Subscriptions; amortize 6,200.00/month to 6100 Software Subscriptions over the term.",
        "reclass": [
         [
          "1400",
          "Prepaid Expenses",
-         22733.33,
+         68200.0,
          0,
          "Prepay Salesforce"
         ],
@@ -544,7 +544,7 @@
          "6100",
          "Software Subscriptions",
          0,
-         22733.33,
+         68200.0,
          "Prepay Salesforce"
         ]
        ]
@@ -557,8 +557,8 @@
        "date": "2026-10-28",
        "account": "6300",
        "counterparty": "Google Ads",
-       "amount": 38400,
-       "issue": "38,400.00 is 3.2x Google Ads's typical 11,855.83. Memo: 'Q4 lead-gen campaign'.",
+       "amount": 38400.0,
+       "issue": "38,400.00 is 3.2x Google Ads's typical 11,855.83 (median of 3 monthly invoices, 2026-07 to 2026-09). Memo: 'Q4 lead-gen campaign'.",
        "fix": "Confirm with budget owner; check for prepaid or one-time item.",
        "reclass": []
       },
@@ -581,11 +581,11 @@
        "account": "4000",
        "name": "Subscription Revenue",
        "type": "Revenue",
-       "current": 266160,
-       "prior": 236160,
-       "var": 30000,
+       "current": 266160.0,
+       "prior": 236160.0,
+       "var": 30000.0,
        "pct": 0.127,
-       "budget": 251200,
+       "budget": 251200.0,
        "flagged": true,
        "commentary": "Subscription Revenue up $30.0K (+13%) vs prior month; $15.0K over budget. Drivers: Northstar Payments $18.0K new this month; Copperline Bank $12.0K new this month."
       },
@@ -597,7 +597,7 @@
        "prior": 45969.85,
        "var": 14148.69,
        "pct": 0.3078,
-       "budget": 46900,
+       "budget": 46900.0,
        "flagged": true,
        "commentary": "Hosting (COGS) up $14.1K (+31%) vs prior month; $13.2K over budget. Drivers: Amazon Web Services +$12.9K (Cloud hosting - usage spike from new customer onboarding)."
       },
@@ -605,11 +605,11 @@
        "account": "6000",
        "name": "Salaries & Wages",
        "type": "Expense",
-       "current": 511000,
-       "prior": 460000,
-       "var": 51000,
+       "current": 511000.0,
+       "prior": 460000.0,
+       "var": 51000.0,
        "pct": 0.1109,
-       "budget": 494000,
+       "budget": 494000.0,
        "flagged": true,
        "commentary": "Salaries & Wages up $51.0K (+11%) vs prior month; $17.0K over budget. Drivers: Engineering +$51.0K (Payroll 2026-10 - Engineering (incl. 3 new hires))."
       },
@@ -618,10 +618,10 @@
        "name": "Payroll Taxes",
        "type": "Expense",
        "current": 38326.5,
-       "prior": 34425,
+       "prior": 34425.0,
        "var": 3901.5,
        "pct": 0.1133,
-       "budget": 35100,
+       "budget": 35100.0,
        "flagged": false,
        "commentary": ""
       },
@@ -629,11 +629,11 @@
        "account": "6020",
        "name": "Employee Benefits",
        "type": "Expense",
-       "current": 60120,
-       "prior": 54000,
-       "var": 6120,
+       "current": 60120.0,
+       "prior": 54000.0,
+       "var": 6120.0,
        "pct": 0.1133,
-       "budget": 55100,
+       "budget": 55100.0,
        "flagged": true,
        "commentary": "Employee Benefits up $6.1K (+11%) vs prior month; $5.0K over budget. Drivers: Engineering +$6.1K (Payroll 2026-10 - Engineering (incl. 3 new hires))."
       },
@@ -641,23 +641,23 @@
        "account": "6100",
        "name": "Software Subscriptions",
        "type": "Expense",
-       "current": 56459.95,
+       "current": 106059.95,
        "prior": 15051.56,
-       "var": 41408.39,
-       "pct": 2.7511,
-       "budget": 15400,
+       "var": 91008.39,
+       "pct": 6.0464,
+       "budget": 15400.0,
        "flagged": true,
-       "commentary": "Software Subscriptions up $41.4K (+275%) vs prior month; $41.1K over budget. Drivers: WeWork $18.8K new this month (Office rent - Seattle) [see PC-07: Wrong account]; Salesforce +$18.5K (Salesforce annual renewal) [see PC-12: Unusual amount]. Part of this change comes from items flagged in pre-close; resolve those before finalizing."
+       "commentary": "Software Subscriptions up $91.0K (+605%) vs prior month; $90.7K over budget. Drivers: Salesforce +$68.1K (Salesforce annual renewal, Oct 2026-Sep 2027) [see PC-12: Unusual amount]; WeWork $18.8K new this month (Office rent - Seattle) [see PC-07: Wrong account]. Part of this change comes from items flagged in pre-close; resolve those before finalizing."
       },
       {
        "account": "6200",
        "name": "Rent",
        "type": "Expense",
-       "current": 0,
+       "current": 0.0,
        "prior": 18003.36,
        "var": -18003.36,
-       "pct": -1,
-       "budget": 18400,
+       "pct": -1.0,
+       "budget": 18400.0,
        "flagged": true,
        "commentary": "Rent down $18.0K (-100%) vs prior month; $18.4K under budget. Drivers: WeWork $18.0K not booked here this month [see PC-07: Wrong account]. Part of this change comes from items flagged in pre-close; resolve those before finalizing."
       },
@@ -665,11 +665,11 @@
        "account": "6300",
        "name": "Marketing - Advertising",
        "type": "Expense",
-       "current": 42900,
+       "current": 42900.0,
        "prior": 11748.91,
        "var": 31151.09,
        "pct": 2.6514,
-       "budget": 30000,
+       "budget": 30000.0,
        "flagged": true,
        "commentary": "Marketing - Advertising up $31.2K (+265%) vs prior month; $12.9K over budget. Drivers: Google Ads +$26.7K (Q4 lead-gen campaign) [see PC-13: Unusual amount]; LinkedIn Ads $9.0K new this month (Q4 ABM campaign). Part of this change comes from items flagged in pre-close; resolve those before finalizing."
       },
@@ -677,11 +677,11 @@
        "account": "6310",
        "name": "Marketing - Events",
        "type": "Expense",
-       "current": 30000,
-       "prior": 0,
-       "var": 30000,
+       "current": 30000.0,
+       "prior": 0.0,
+       "var": 30000.0,
        "pct": null,
-       "budget": 20000,
+       "budget": 20000.0,
        "flagged": true,
        "commentary": "Marketing - Events up $30.0K (n/m - nothing booked last month) vs prior month; $10.0K over budget. Drivers: FinTech Summit $25.0K new this month (FinTech Summit 2026 sponsorship); Reclass booth costs to events $5.0K new this month [see PC-05: Unbalanced JE]. Part of this change comes from items flagged in pre-close; resolve those before finalizing."
       },
@@ -693,7 +693,7 @@
        "prior": 9564.83,
        "var": 15405.09,
        "pct": 1.6106,
-       "budget": 9800,
+       "budget": 9800.0,
        "flagged": true,
        "commentary": "Professional Fees up $15.4K (+161%) vs prior month; $15.2K over budget. Drivers: Pemberton Legal LLP +$9.4K (Legal retainer - November) [see PC-01: Cutoff]; Accrued audit fees $6.0K new this month [see PC-03: Missing approval]. Part of this change comes from items flagged in pre-close; resolve those before finalizing."
       },
@@ -705,7 +705,7 @@
        "prior": 1849.64,
        "var": -1250.72,
        "pct": -0.6762,
-       "budget": 1900,
+       "budget": 1900.0,
        "flagged": false,
        "commentary": ""
       },
@@ -717,7 +717,7 @@
        "prior": 3471.47,
        "var": 24.89,
        "pct": 0.0072,
-       "budget": 3500,
+       "budget": 3500.0,
        "flagged": false,
        "commentary": ""
       },
@@ -729,7 +729,7 @@
        "prior": 1558.35,
        "var": -36.3,
        "pct": -0.0233,
-       "budget": 1600,
+       "budget": 1600.0,
        "flagged": false,
        "commentary": ""
       }
@@ -969,7 +969,7 @@
       "invoice": "INV-24062",
       "due_date": "2026-10-30",
       "days_past_due": "14",
-      "bucket": "1–30",
+      "bucket": "1\u201330",
       "balance_usd": "214800",
       "base_collection_rate": "0.95"
      },
@@ -978,7 +978,7 @@
       "invoice": "INV-24071",
       "due_date": "2026-11-02",
       "days_past_due": "11",
-      "bucket": "1–30",
+      "bucket": "1\u201330",
       "balance_usd": "176400",
       "base_collection_rate": "0.95"
      },
@@ -987,7 +987,7 @@
       "invoice": "INV-24079",
       "due_date": "2026-11-06",
       "days_past_due": "7",
-      "bucket": "1–30",
+      "bucket": "1\u201330",
       "balance_usd": "92150",
       "base_collection_rate": "0.95"
      },
@@ -996,7 +996,7 @@
       "invoice": "INV-24085",
       "due_date": "2026-11-09",
       "days_past_due": "4",
-      "bucket": "1–30",
+      "bucket": "1\u201330",
       "balance_usd": "118600",
       "base_collection_rate": "0.95"
      },
@@ -1005,7 +1005,7 @@
       "invoice": "INV-23991",
       "due_date": "2026-10-05",
       "days_past_due": "39",
-      "bucket": "31–60",
+      "bucket": "31\u201360",
       "balance_usd": "146300",
       "base_collection_rate": "0.85"
      },
@@ -1014,7 +1014,7 @@
       "invoice": "INV-24003",
       "due_date": "2026-10-12",
       "days_past_due": "32",
-      "bucket": "31–60",
+      "bucket": "31\u201360",
       "balance_usd": "87900",
       "base_collection_rate": "0.85"
      },
@@ -1023,7 +1023,7 @@
       "invoice": "INV-24010",
       "due_date": "2026-09-28",
       "days_past_due": "46",
-      "bucket": "31–60",
+      "bucket": "31\u201360",
       "balance_usd": "61200",
       "base_collection_rate": "0.85"
      },
@@ -1032,7 +1032,7 @@
       "invoice": "INV-23902",
       "due_date": "2026-09-04",
       "days_past_due": "70",
-      "bucket": "61–90",
+      "bucket": "61\u201390",
       "balance_usd": "71800",
       "base_collection_rate": "0.6"
      },
@@ -1041,7 +1041,7 @@
       "invoice": "INV-23915",
       "due_date": "2026-08-25",
       "days_past_due": "80",
-      "bucket": "61–90",
+      "bucket": "61\u201390",
       "balance_usd": "42350",
       "base_collection_rate": "0.6"
      },
@@ -1507,15 +1507,15 @@
       "balance_usd_k": "2295.1"
      },
      {
-      "bucket": "1–30",
+      "bucket": "1\u201330",
       "balance_usd_k": "601.95"
      },
      {
-      "bucket": "31–60",
+      "bucket": "31\u201360",
       "balance_usd_k": "295.4"
      },
      {
-      "bucket": "61–90",
+      "bucket": "61\u201390",
       "balance_usd_k": "114.15"
      },
      {

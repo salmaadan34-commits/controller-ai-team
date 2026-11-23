@@ -24,7 +24,7 @@ test("anything sent to customers is held (rule 6)", () => {
 test("JEs at the limit are held (rule 3)", () => {
   assert.equal(evaluate({ type: "journal_entry", amount: 10000, accounts: ["6420", "1010"] }).held, true);
 });
-test("any JE touching revenue is held, even $1", () => {
+test("any JE posting to a revenue account is held, even $1", () => {
   assert.equal(evaluate({ type: "journal_entry", amount: 1, accounts: ["4000", "1200"] }).held, true);
 });
 test("interest income (4900) is not revenue", () => {

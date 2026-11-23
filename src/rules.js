@@ -23,8 +23,8 @@ export const RULES = [
   },
   {
     id: 3,
-    name: `Journal entries ≥ $${JE_APPROVAL_LIMIT.toLocaleString("en-US")} or touching revenue`,
-    why: "Material entries and anything in revenue get a second set of eyes.",
+    name: `Journal entries ≥ $${JE_APPROVAL_LIMIT.toLocaleString("en-US")} or posting to revenue accounts`,
+    why: "Material entries, and any entry posted to a revenue account (4000–4199), get a second review.",
     test: (a) =>
       a.type === "journal_entry" &&
       ((a.amount ?? 0) >= JE_APPROVAL_LIMIT || (a.accounts ?? []).some((x) => isRevenueAccount(x))),

@@ -29,7 +29,7 @@ All agent actions go through `evaluate()` in [`src/rules.js`](src/rules.js). The
 
 1. Anything to the IRS or a state
 2. Releasing cash or scheduling future payments
-3. Journal entries of $10,000 or more, or anything touching revenue (4000–4199)
+3. Journal entries of $10,000 or more, or any entry posted to a revenue account (4000–4199)
 4. Anything to auditors or the board
 5. Vendor or bank master-data changes
 6. Anything sent to customers, including collections reminders

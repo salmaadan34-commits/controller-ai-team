@@ -2,6 +2,9 @@
 // and cross-project data checks. Nothing here is hand-typed: every action names its source.
 import { triage } from "./rules.js";
 
+/** Invoices this many days past due or fewer are watched, not chased. */
+export const COLLECTIONS_GRACE_DAYS = 10;
+
 export const TEAMS = [
   { id: "close", name: "Close", roles: ["Bank rec", "Pre-close checks", "Proposed JEs", "Flux commentary", "Close KPIs"] },
   { id: "ap", name: "AP & Spend", roles: ["Payment run prep", "Disputes & holds", "Due-date tracking", "Vendor master", "Spend review"] },
@@ -21,6 +24,42 @@ const clean = (d) => {
   return t === t.toUpperCase() ? t.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase()).replace(/\bLlc\b/g, "LLC") : t;
 };
 const fmtDate = (iso) => new Date(iso + "T00:00:00Z").toLocaleDateString("en-US", { month: "short", day: "numeric", timeZone: "UTC" });
+
+// Bank rec as auditors read it: balance per bank and per books, and the reconciling items between them.
+const BOOK_LABELS = {
+  "Unbooked bank fee": "Bank charges not yet booked",
+  "Unbooked interest": "Interest not yet booked",
+  "Duplicate GL entry": "Error: duplicate GL entry",
+  "Amount mismatch": "Error: transposed amount",
+  "Unrecorded transaction": "Receipt not yet recorded",
+};
+function bankRecDetail(bank) {
+  const rows = [];
+  for (const a of bank.accounts) {
+    const its = bank.items.filter((i) => i.account === a.account);
+    const name = a.account[0] + a.account.slice(1).toLowerCase();
+    if (!its.length) {
+      rows.push([name, `Bank ${usd(a.bank_end, 2)} = books ${usd(a.gl_end, 2)} · no reconciling items`]);
+      continue;
+    }
+    const group = (cats) => its.filter((i) => cats.includes(i.category));
+    const dit = group(["Deposit in transit"]), os = group(["Outstanding check", "Stale item"]);
+    const sum = (xs) => xs.reduce((s, i) => s + i.amount, 0);
+    rows.push([`${name} · per bank`, usd(a.bank_end, 2)]);
+    if (dit.length) rows.push(["  + Deposits in transit", `${dit.length} · ${usd(sum(dit), 2)}`]);
+    if (os.length) rows.push(["  − Outstanding checks", `${os.length} · ${usd(Math.abs(sum(os)), 2)}${group(["Stale item"]).length ? " (incl. 1 stale)" : ""}`]);
+    rows.push([`${name} · per books`, usd(a.gl_end, 2)]);
+    for (const [cat, label] of Object.entries(BOOK_LABELS)) {
+      const xs = group([cat]);
+      if (!xs.length) continue;
+      // effect on the books = net debit to the cash account in the proposed entry
+      const eff = xs.reduce((s, i) => s + i.je_lines.filter((l) => /^10/.test(l[0])).reduce((t, l) => t + l[2] - l[3], 0), 0);
+      rows.push([`  ${eff >= 0 ? "+" : "−"} ${label}`, `${xs.length} · ${usd(Math.abs(eff), 2)}`]);
+    }
+    rows.push([`${name} · unreconciled`, usd(a.difference, 2)]);
+  }
+  return rows;
+}
 
 export function buildWeek(linked) {
   const S = linked.sources;
@@ -80,9 +119,7 @@ export function buildWeek(linked) {
   add({ team: "close", role: "Bank rec", source: "close", type: "report", destination: "auditor",
     title: "Send October bank rec workpapers to auditors",
     summary: `${bank.accounts.length} accounts, ${bank.accounts.every((a) => a.difference === 0) ? "all tied" : "not all tied"} · requested for interim fieldwork`,
-    detail: [["Workpapers", "Rec summary, exceptions, proposed JEs, matched items"],
-      ...bank.accounts.map((a) => [a.account, `Adjusted ${usd(a.adjusted_bank, 2)} · difference ${usd(a.difference, 2)}`]),
-      ["Open", `${bank.items.filter((x) => x.needs_attention).length} items still need attention`]] });
+    detail: [["Workpapers", "Rec summary, reconciling items, matched items"], ...bankRecDetail(bank)] });
 
   // ---------------- AP  (13-week cash flow AP aging + CFO minimum cash policy)
   const weekEnd = addDays(asOf, 7);
@@ -106,11 +143,20 @@ export function buildWeek(linked) {
       ...later.map((r) => [r.vendor, `${usd(num(r.amount_usd))} · due ${fmtDate(r.due_date)}`])] });
 
   // ---------------- AR  (13-week AR aging + CFO variance notes)
-  const overdue = ar.filter((r) => num(r.days_past_due) > 0 && r.bucket !== "90+");
+  // Reminders go out once an invoice is more than COLLECTIONS_GRACE_DAYS past due; newer ones are watched.
+  const pastDue = ar.filter((r) => num(r.days_past_due) > 0 && r.bucket !== "90+");
+  const overdue = pastDue.filter((r) => num(r.days_past_due) > COLLECTIONS_GRACE_DAYS);
+  const watch = pastDue.filter((r) => num(r.days_past_due) <= COLLECTIONS_GRACE_DAYS);
+  const maxDays = Math.max(...overdue.map((r) => num(r.days_past_due)));
   add({ team: "ar", role: "Collections", source: "cash", type: "collections", destination: "customer",
-    title: `Send reminders on ${overdue.length} overdue invoices`,
-    summary: `${k(overdue.reduce((s, r) => s + num(r.balance_usd), 0))} past due 1–60 days · drafted, not sent`,
+    title: `Send reminders on ${overdue.length} invoices over ${COLLECTIONS_GRACE_DAYS} days past due`,
+    summary: `${k(overdue.reduce((s, r) => s + num(r.balance_usd), 0))} past due ${COLLECTIONS_GRACE_DAYS + 1}–${maxDays} days · drafted, not sent`,
     detail: overdue.map((r) => [r.customer, `${r.invoice} · ${usd(num(r.balance_usd))} · ${r.days_past_due} days past due`]) });
+  if (watch.length) {
+    add({ team: "ar", role: "Collections", source: "cash", type: "review",
+      title: `Watching ${watch.length} invoices 1–${COLLECTIONS_GRACE_DAYS} days past due`,
+      summary: `${k(watch.reduce((s, r) => s + num(r.balance_usd), 0))} · no reminder until day ${COLLECTIONS_GRACE_DAYS + 1}` });
+  }
   const dueSoon = ar.filter((r) => r.bucket === "Current" && r.due_date <= weekEnd);
   add({ team: "ar", role: "Cash forecast", source: "cash", type: "forecast",
     title: `Expecting ${k(dueSoon.reduce((s, r) => s + num(r.balance_usd), 0))} in receipts by ${fmtDate(weekEnd)}`,
